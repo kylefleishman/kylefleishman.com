@@ -1,0 +1,31 @@
+{
+  "name": "Kyle Fleishman",
+  "homepage": "http://kylefleishman.com",
+  "private": true,
+  "description": "Kyle Fleishman's personal website",
+  "author": "Kyle FLeishman",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start": "gatsby develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^4.19.2",
+    "gatsby-plugin-react-helmet": "^5.19.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.4.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kylefleishman"
+  }
+}
