@@ -1,9 +1,9 @@
 const config = {
     siteTitle: 'Kyle Fleishman',
-    siteUrl: 'https://www.kylefleishman.com',
-    siteLogo: '../assets/blue-potion.png',
+    siteUrl: 'https://www.kylefleishman.com/',
+    siteLogo: '/blue-potion.png',
     description:
-      'Network Engineer and Software Developer, loving every second!',
+      'Network Engineer and Software Developer in the Greater Chicago area, living pura vida.',
   }
   
   export default config

@@ -1,30 +1,24 @@
 // Import React & Gatsby.js's Link component
 
 import * as React from 'react'
-import Helmet from 'react-helmet'
-import { Link } from 'gatsby'
+import { graphql, Link } from "gatsby"
 import { Hero } from '../components/Hero'
-import Typewriter from '../components/Typewriter';
-import config from '../utils/config'
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from '../components/Layout'
-import { SEO } from '../components/SEO'
-import heroImage from '../assets/me.png'
-import openbible from '../assets/openbible.png'
-import dalens from '../assets/dalens.png'
-import kylefleishman from '../assets/kylefleishman.png'
+
 
 // Define your component
-const Projects = () => {
+const Projects = ({data}) => {
+  const projects = data.allMarkdownRemark.nodes
   return (
     <Layout> 
       
-      <Helmet title={config.siteTitle} />
-      <SEO />
+      
 
       <div className="container">
         
         
-          <Hero  index> <h1> <Typewriter text="Projects" /></h1>
+          <Hero  index> <h1> Projects</h1>
           </Hero>
          
         
@@ -32,47 +26,35 @@ const Projects = () => {
 
       <div className="container">
         <div className="project-wrapper">
-        <div className='project-image'><img src={dalens} alt="Photo of the front page of the Dalen's Resort website" /></div>
-        <div className='project-content'> <h1>Dalen's Resort</h1>
-          <p className="subtitle">
-          This was one of the first websites I created as a web designer and developer. It was a great learning experience for me as it allowed me to apply my education in web design and development to create a website for a client. From the first meetings with the client to the low and high-fidelity mockups, it was a rewarding experience to bring the client's vision to life.
-            </p>
-            </div>
-         
-          <div>
-          </div>
-        </div>
+              
+        {projects.map(project => {
+        let projectImage = getImage(project.frontmatter.projectImage?.childImageSharp?.gatsbyImageData)
 
-        <div className="project-wrapper">
-        
-        <div className='project-content'><h1>Open Bible Streator</h1>
-        <p className="subtitle">
-        This website was the culmination of my experience as a freelance web designer and developer. It was a great opportunity to put all of my skills and lessons learned into practice, working with clients to create a beautiful and well-executed project. The end result was a website that met the content's goals and exceeded their expectations.
-          </p>
+        return (
+        <div >
+          <div className="project-image">
+          <Link style={{ textDecoration: 'none' }} to={project.frontmatter.slug}>  
+           <GatsbyImage image={projectImage}/> </Link>
+           </div>
+           <div className='project-content'>
+          <Link style={{ textDecoration: 'none' }} to={project.frontmatter.slug}>
+            <h2>{project.frontmatter.title}</h2>
+          </Link>
           </div>
-       
-        <div>
-        </div>
-        <div className='project-image'><img src={openbible} alt="Photo of the front page of the Open Bible Streator website" /></div>
-      </div>
-      <div className="project-wrapper">
-        <div className='project-image'><img src={kylefleishman} alt="Photo of the front page of kylefleishman.com" /></div>
-        <div className='project-content'> <h1>KyleFleishman.com</h1>
-          <p className="subtitle">
-          My first major website built with Gatsby, this project was a tremendous learning experience for me. The website was designed to serve as my portfolio, blog, and showcase my projects to the world. The website allowed me to experiment with different web development techniques and refine my design skills, resulting in a visually stunning website I am more than proud of.
-            </p>
-            </div>
-         
-          <div>
           </div>
+      
+        )
+      })}
         </div>
       </div>
 
+    
       <div className="container">
         <div className="contact-wrapper">
-          <div className='contact'> <h1> <Typewriter text="Like what you see?" /></h1>
+          <div className='contact'> <h1>Future Projects</h1>
             <p className="subtitle">
-              Feel free to reach out! You can contact me by email at <b>hello</b> at <b>kylefleishman.com</b> to say hi or shoot over a question! I'm always looking for my next project to expand my experience and expertise.
+              At this time I am currently studying to obtain my CCNA, and do not have any major projects in development.
+              Although I am always looking to put my skills to use, and if you want to contact me in regards to developing a website or enterprise network or have any questions, feel free to send me an email at <b>hello</b> at <b>kylefleishman.com</b>.
               
             </p>
           </div>
@@ -80,9 +62,29 @@ const Projects = () => {
         </div>
       </div>
       
+      
       </Layout>
   )
 }
 
 // Export your component
 export default Projects
+
+export const query = graphql`
+  query CabinsQuery {
+    allMarkdownRemark (sort: { frontmatter: { order: ASC } }, limit: 6) {
+      nodes {
+        frontmatter {
+          slug
+          order
+          title
+          projectImage {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+      }
+    }
+  }
+`

@@ -6,29 +6,29 @@ import blog from '../assets/blue-potion.png'
 import floppyLogo from '../assets/blue-potion.png'
 import floppy from '../assets/blue-potion.png'
 import github from '../assets/blue-potion.png'
-//import projects from '../assets/blue-potion.png'
 import { slugify } from '../utils/helpers'
 
 
 const mainNavItems = [
-  { url: '/me', icon: floppy, label: 'About me' },
+  { url: '/me', icon: floppy, label: 'About' },
   { url: '/projects', icon: floppy, label: 'Projects' },
 ]
 
 const socialNavItems = [
-  { url: 'https://github.com/kylefleishman', icon: github, label: 'GitHub' },
+  { url: 'https://github.com/kylefleishman/', icon: github, label: 'GitHub' },
 ]
 
-export const Navigation = ({ setCollapsed, theme, onUpdateTheme }) => {
+export const Navigation = ({ }) => {
   return (
     <section className="navigation">
       <div className="container">
     
         <nav>
        
-          <Link to="/" className="item brand">
-            <img src={floppyLogo} className="logo" alt="Kyle Fleishman" />
-            <span>Kyle Fleishman</span>
+          <Link to="/" className="item brand"  activeClassName="index">
+            <span>Home</span>
+            
+            <span className='nav-mobile-view'>Kyle Fleishman</span>
           </Link>
           {mainNavItems.map((item) => (
             <div className="nav-item-outer">
@@ -59,9 +59,7 @@ export const Navigation = ({ setCollapsed, theme, onUpdateTheme }) => {
             </div>
           ))}
         </nav>
-        <button className="theme-toggle" onClick={onUpdateTheme}>
-          <span>{theme === 'dark' ? 'Dark' : 'Light'}</span>
-        </button>
+       
       </div>
     </section>
   )
